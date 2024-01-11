@@ -41,23 +41,19 @@ public class AppUserService {
             if (userDetails.getFirstName() != null)
                 existingUser.setFirstName(userDetails.getFirstName());
 
-            if (userDetails.getFirstName() != null)
-                existingUser.setFirstName(userDetails.getFirstName());
-
             if (userDetails.getLastName() != null)
                 existingUser.setLastName(userDetails.getLastName());
 
             if (userDetails.getEmail() != null)
-                existingUser.setLastName(userDetails.getEmail());
+                existingUser.setEmail(userDetails.getEmail());
 
             if (userDetails.getPhone() != null)
-                existingUser.setLastName(userDetails.getLastName());
+                existingUser.setPhone(userDetails.getPhone());
 
             if (userDetails.getPassword() != null)
                 existingUser.setPassword(userDetails.getPassword());
 
 
-            existingUser.setEmail(userDetails.getEmail());
             return appUserRepo.save(existingUser);
         } else
             throw new NotFoundException("User not found");
@@ -73,10 +69,9 @@ public class AppUserService {
     }
 
     public AppUser getUserByCredentials(String username, String password) throws NotFoundException {
-         Optional<AppUser> appUser = appUserRepo.findByUsernameAndPassword(username, password);
-         if (appUser.isPresent()){
-             return appUser.get();
-         }
-         else throw new NotFoundException("Invalid login/password");
+        Optional<AppUser> appUser = appUserRepo.findByUsernameAndPassword(username, password);
+        if (appUser.isPresent()) {
+            return appUser.get();
+        } else throw new NotFoundException("Invalid login/password");
     }
 }
